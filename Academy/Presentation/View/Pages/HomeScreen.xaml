@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="Academy.Presentation.View.Pages.HomeScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Academy.Presentation.View.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="520" d:DesignWidth="800">
+    
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Background="IndianRed">
+            <WrapPanel Height="50" Margin="0,10,0,0">
+                <Button Height="40" Width="100" Margin="20,5,0,5" Background="#686bff" BorderBrush="#434556" BorderThickness="1" Content="Subjects" Foreground="Black" FontSize="15"/>
+                <Button Height="40" Width="100" Margin="10,5,0,5" Background="#686bff" BorderBrush="#434556" BorderThickness="1" Content="Schedules" Foreground="Black" FontSize="15" Click="Schedules_Click"/>
+                <Button Height="40" Width="100" Margin="10,5,0,5" Background="#686bff" BorderBrush="#434556" BorderThickness="1" Content=""/>
+
+                <Label x:Name="UserNameTextBox" Height="50" Width="250" Margin="130,0,0,0" FontSize="30" FontFamily="Times New Roman" FontWeight="SemiBold"  Foreground="#434556"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                <Image Height="50" Width="50" Source="https://cdn.icon-icons.com/icons2/1154/PNG/512/1486564400-account_81513.png" Margin="10,0,0,0"/>
+            </WrapPanel>
+            
+            <WrapPanel>
+                <Label Height="45" Margin="20,5,0,0" Content="Your Subjects" FontSize="30" FontFamily="Times New Roman" FontWeight="SemiBold"  Foreground="#434556"/>
+                <Image Width="100" Margin="-25,0,0,0" Source="https://cdn.icon-icons.com/icons2/567/PNG/512/bookshelf_icon-icons.com_54414.png" Height="40"/>
+
+                <Button Margin="335,0,0,0" Width="130" Content="Add Subject" Background="#686bff" BorderThickness="0" HorizontalContentAlignment="Left" Click="AddSubject_Click"/>
+                <Image Source="https://cdn.icon-icons.com/icons2/916/PNG/512/Plus_icon-icons.com_71848.png" Height="30" Width="30" Margin="-40,0,0,0"/>
+            </WrapPanel>
+            
+            
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Background="RosyBrown">
+            <ListView x:Name="LVHomeScreen" Width="760" Height="350" Margin="20">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="2"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="170"/>
+                                <ColumnDefinition Width="180"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <WrapPanel Height="160" Width="350" Background="#466cff" Grid.ColumnSpan="2">
+                                <StackPanel Grid.Column="0">
+                                    <Border Name="mask" Background="White" CornerRadius="7"/>
+                                    <Label Height="35" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,20,0,0" Content="{Binding Name}" FontSize="22" Foreground="Wheat" FontFamily="Times new Roman"/>
+                                    <Label Height="30" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"  Content="{Binding Description}" FontSize="15" Foreground="Wheat" FontFamily="Times new Roman"/>
+                                    <Button Height="30" Width="120" HorizontalAlignment="Left" Margin="10,10,0,0" Content="Continue" Background="White" Foreground="Indigo" BorderThickness="15" BorderBrush="White" Click="Continue_Click"/>
+                                </StackPanel>
+                                
+                            </WrapPanel>
+                            <Image Grid.Column="1" Width="170" Height="100" VerticalAlignment="Center" Margin="0,0,10,0" Source="{Binding Image}"/>
+                        </Grid>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackPanel>
+
+
+    </Grid>
+    
+</UserControl>
+    
