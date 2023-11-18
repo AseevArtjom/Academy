@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace Academy.Presentation.View.Pages
 {
-    /// <summary>
-    /// Interaction logic for LoginScreen.xaml
-    /// </summary>
     public partial class LoginScreen : Window
     {
         private UserList userList;
@@ -93,6 +90,11 @@ namespace Academy.Presentation.View.Pages
 
             ErrorLabel.BorderBrush = Brushes.Red;
             ErrorLabel.Content = "Invalid password or username!";
+        }
+
+        private void ForgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("There is nothing we can do","Forgot Password",MessageBoxButton.OK,MessageBoxImage.Warning);
         }
     }
 }

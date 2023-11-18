@@ -35,20 +35,35 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Background="RosyBrown">
-            <ListView x:Name="LVHomeScreen" Width="760" Height="350" Margin="20">
+            <ListView x:Name="LVHomeScreen" Width="760" Height="350" Margin="20" >
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="2"/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <EventSetter Event="MouseEnter" Handler="ListViewItem_MouseEnter"/>
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Margin" Value="6"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid Margin="5,0,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="170"/>
                                 <ColumnDefinition Width="180"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <WrapPanel Height="160" Width="350" Background="#466cff" Grid.ColumnSpan="2">
                                 <StackPanel Grid.Column="0">
                                     <Border Name="mask" Background="White" CornerRadius="7"/>
@@ -56,11 +71,11 @@
                                     <Label Height="30" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"  Content="{Binding Description}" FontSize="15" Foreground="Wheat" FontFamily="Times new Roman"/>
                                     <Button Height="30" Width="120" HorizontalAlignment="Left" Margin="10,10,0,0" Content="Continue" Background="White" Foreground="Indigo" BorderThickness="15" BorderBrush="White" Click="Continue_Click"/>
                                 </StackPanel>
-                                
+
                             </WrapPanel>
                             <Image Grid.Column="1" Width="170" Height="100" VerticalAlignment="Center" Margin="0,0,10,0" Source="{Binding Image}"/>
                         </Grid>
-                        
+
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

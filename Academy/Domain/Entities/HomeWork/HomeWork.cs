@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Security.Cryptography.Pkcs;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,12 +24,12 @@ namespace Academy.Domain.Entities.HomeWork
         public MyUser? Assigner { get { return _assigner; } set { _assigner = value; OnPropertyChanged("Assigner"); } }
         public int Mark { get { return _mark; } set { _mark = value; OnPropertyChanged("Mark"); } }
 
-        public HomeWork(string name,DateTime set,DateTime end,MyUser user,int mark)
+        public HomeWork(string name,DateTime set,DateTime end,MyUser assigner,int mark)
         {
             Name = name;
             SetHomeWork = set;
             EndHomeWork = end;
-            Assigner = user;
+            Assigner = assigner;
             Mark = mark;
         }
 

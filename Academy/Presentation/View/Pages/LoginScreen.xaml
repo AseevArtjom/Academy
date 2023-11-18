@@ -59,7 +59,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="120,10,0,0">
+                <Button Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="120,10,0,0" Click="ForgotPassword_Click">
                     <TextBlock Text="Forgot password?" FontSize="20" FontFamily="Helvetica" Foreground="#007aff"/>
                 </Button>
             </WrapPanel>

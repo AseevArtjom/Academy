@@ -12,6 +12,16 @@ namespace Academy.Domain.Entities.HomeWork
     {
         public List<HomeWork>? HomeWorks = null;
 
+        public HomeWork SelectedHomeWork
+        {
+            get { return SelectedHomeWork; }
+            set
+            {
+                SelectedHomeWork = value;
+                OnPropertyChanged("SelectedHomeWork");
+            }
+        }
+
         public HomeWorkList()
         {
             HomeWorks = new List<HomeWork>();

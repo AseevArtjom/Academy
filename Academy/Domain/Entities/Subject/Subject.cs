@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
+using Academy.Domain.Entities.HomeWork;
 
 namespace Academy.Domain.Entities.Subject
 {
@@ -13,6 +14,7 @@ namespace Academy.Domain.Entities.Subject
         public string? _name;
         public string? _description;
         public string? _image;
+        public List<HomeWork.HomeWork> homeworks = new List<HomeWork.HomeWork>();
 
         public Subject(string name, string description, string image)
         {

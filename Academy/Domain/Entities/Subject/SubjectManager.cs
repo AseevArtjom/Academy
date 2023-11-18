@@ -31,7 +31,7 @@ namespace Academy.Domain.Entities.Subject
         public void AddSubject(Subject subject)
         {
             Subjects?.Add(subject);
-            SubjectAdded.Invoke(subject);
+            SubjectAdded?.Invoke(subject);
         }
 
     }

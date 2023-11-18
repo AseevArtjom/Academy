@@ -36,20 +36,11 @@ namespace Academy.Presentation.View.Pages
             UserNameTextBox.Content = currentuser.GetUserName();
             CurrentUser = currentuser;
 
-            var subjectManager = SubjectManager.GetInstance();
-
             SubjectManager.SubjectAdded += OnSubjectAdded;
 
+            var subjectManager = SubjectManager.GetInstance();
 
-            subjectManager.Subjects.Add(new Subject("Math", "Basic algorithms", "https://cdn.icon-icons.com/icons2/1351/PNG/512/icon-math_87982.png"));
-            subjectManager.Subjects.Add(new Subject("Geometry", "Basic shapes", "https://cdn.icon-icons.com/icons2/1617/PNG/512/3700470-drawing-geometry-measure-measuring-rulers-set-square_108760.png"));
-            subjectManager.Subjects.Add(new Subject("English", "Learn language", "https://cdn.icon-icons.com/icons2/3665/PNG/512/gb_flag_great_britain_england_union_jack_english_icon_228674.png"));
-            subjectManager.Subjects.Add(new Subject("Geography", "Geography of the world", "https://cdn.icon-icons.com/icons2/2313/PNG/512/globe_geography_global_international_education_icon_141976.png"));
-            subjectManager.Subjects.Add(new Subject("Computer science", "Basic programming languages", "https://cdn.icon-icons.com/icons2/568/PNG/512/desk_icon-icons.com_54432.png"));
-            subjectManager.Subjects.Add(new Subject("Chemistry", "Molecular Science", "https://cdn.icon-icons.com/icons2/1617/PNG/512/3700459-chemical-chemistry-education-flask-science-test-tube_108750.png"));
-            subjectManager.Subjects.Add(new Subject("Physics", "Explore laws of nature", "https://cdn.icon-icons.com/icons2/609/PNG/512/molecule_icon-icons.com_56341.png"));
-
-            LVHomeScreen.ItemsSource = subjectManager.Subjects;
+            LVHomeScreen.ItemsSource = SubjectManager.GetInstance().Subjects;
         }
 
         private void LVMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -105,7 +96,19 @@ namespace Academy.Presentation.View.Pages
 
         private void Continue_Click(object sender, RoutedEventArgs e)
         {
-            NavigatorObject.Switch(new SubjectMain(CurrentUser));
+            SubjectMain subjectMain = new SubjectMain(CurrentUser);
+            NavigatorObject.Switch(subjectMain);
+        }
+
+        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (sender is ListViewItem item)
+            {
+                if (item.DataContext is Subject selectedSubject)
+                {
+                    SubjectManager.GetInstance().SelectedSubject = selectedSubject;
+                }
+            }
         }
     }
 }
