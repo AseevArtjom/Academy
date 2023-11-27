@@ -1,9 +1,7 @@
 ﻿using Academy.Domain.Entities;
-using Academy.Domain.Entities.Subject;
 using Academy.Domain.Entities.User;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,24 +17,25 @@ using System.Windows.Shapes;
 
 namespace Academy.Presentation.View.Pages
 {
-    /// <summary>
-    /// Interaction logic for Schedule.xaml
-    /// </summary>
-    public partial class Schedule : UserControl 
+    public partial class UsersPage : UserControl
     {
-        private MyUser CurrentUser;
-
-        public Schedule(MyUser myUser)
+        MyUser CurrentUser;
+        public UsersPage(MyUser CurrentUser)
         {
             InitializeComponent();
-            CurrentUser = myUser;
-            UserNameTextBox.Content = CurrentUser.GetUserName();
-            
+            this.CurrentUser = CurrentUser;
+            UserNameTextBox.Content = CurrentUser.UserName;
+            LVUsers.ItemsSource = UserManager.GetInstance().Users;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Updatepage()
         {
+            NavigatorObject.Switch(new UsersPage(CurrentUser));
+        }
 
+        private void Schedules_Click(object sender, RoutedEventArgs e)
+        {
+            NavigatorObject.Switch(new Schedule(CurrentUser));
         }
 
         private void Subject_Click(object sender, RoutedEventArgs e)
@@ -44,15 +43,28 @@ namespace Academy.Presentation.View.Pages
             NavigatorObject.Switch(new HomeScreen());
         }
 
-        private void Calendar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-
+            AddUser addUser = new AddUser();
+            addUser.ShowDialog();
+            Updatepage();
         }
 
-        private void Users_Click(object sender, RoutedEventArgs e)
+        private void DeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            NavigatorObject.Switch(new UsersPage(CurrentUser));
+            var SelectedUser = LVUsers.SelectedItem as MyUser;
+            var choice = MessageBox.Show("Are you sure you want to delete " + SelectedUser.UserName + "?","Choice",MessageBoxButton.YesNo,MessageBoxImage.Question,MessageBoxResult.No);
+            if (choice == MessageBoxResult.Yes)
+            {
+                UserManager.GetInstance().Users.Remove(SelectedUser);
+                Updatepage();
+            }
+            else
+            {
+
+            }   
         }
+
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
             if (UserPopup.IsOpen)

@@ -36,6 +36,7 @@ namespace Academy.Presentation.View.Pages
 
             SelectedSubject = SubjectManager.GetInstance().SelectedSubject;
 
+
             SubjectName.Content = SelectedSubject.Name;
             if (SelectedSubject.Image != "")
             {
@@ -46,12 +47,12 @@ namespace Academy.Presentation.View.Pages
 
             
 
-            LVHomeWork.ItemsSource = SelectedSubject.homeworks;
+            LVHomeWork.ItemsSource = SelectedSubject.homeworks.HomeWorks;
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            NavigatorObject.Switch(new HomeScreen(currentuser));
+            NavigatorObject.Switch(new HomeScreen());
         }
 
         private void HomeWorkClick(object sender, RoutedEventArgs e)
@@ -66,15 +67,22 @@ namespace Academy.Presentation.View.Pages
             {
                 if (item.DataContext is HomeWork selectedhomework)
                 {
-                    SelectedHomeWork = selectedhomework;
+                    SubjectManager.GetInstance().SelectedSubject.SelectedHomeWork = selectedhomework;
                 }
             }
         }
 
         private void AddHomeWork(object sender, RoutedEventArgs e)
         {
-            AddHomeWork addHomeWork = new AddHomeWork();
-            addHomeWork.Show();
+            AddHomeWork addHomeWork = new AddHomeWork(currentuser);
+            addHomeWork.ShowDialog();
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            SubjectManager.GetInstance().SelectedSubject.homeworks.RemoveHomeWork(SubjectManager.GetInstance().SelectedSubject.SelectedHomeWork);
+            SubjectMain subjectmain = new SubjectMain(currentuser);
+            NavigatorObject.Switch(subjectmain);
         }
     }
 }

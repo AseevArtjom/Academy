@@ -27,36 +27,26 @@ namespace Academy.Presentation.View.Pages
     /// </summary>
     public partial class HomeScreen : UserControl
     {
-        private MyUser CurrentUser;
-        public HomeScreen(MyUser currentuser)
+        MyUser currentuser = UserManager.GetInstance().SelectedUser;
+        public HomeScreen()
         {
             InitializeComponent();
 
 
-            UserNameTextBox.Content = currentuser.GetUserName();
-            CurrentUser = currentuser;
+            UserNameTextBox.Content = currentuser.GetUserName().ToString();
 
-            SubjectManager.SubjectAdded += OnSubjectAdded;
-
-            var subjectManager = SubjectManager.GetInstance();
-
-            LVHomeScreen.ItemsSource = SubjectManager.GetInstance().Subjects;
+            LVHomeScreen.ItemsSource = UserManager.GetInstance().SelectedUser.Subjects;
         }
 
         private void LVMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (LVHomeScreen.SelectedItem != null)
             {
-                SubjectManager.GetInstance().SelectedSubject = (Subject)LVHomeScreen.SelectedItem;
+               SubjectManager.GetInstance().SelectedSubject = (Subject)LVHomeScreen.SelectedItem;
             }
         }
 
-        private void OnSubjectAdded(Subject subject)
-        {
-            LVHomeScreen.ItemsSource = null;
-            LVHomeScreen.ItemsSource = SubjectManager.GetInstance().Subjects;
-        }
-
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -64,7 +54,7 @@ namespace Academy.Presentation.View.Pages
 
         private void Schedules_Click(object sender, RoutedEventArgs e)
         {
-            NavigatorObject.Switch(new Schedule(CurrentUser));
+            NavigatorObject.Switch(new Schedule(currentuser));
         }
 
         public Action? CloseAction { get; set; }
@@ -90,13 +80,13 @@ namespace Academy.Presentation.View.Pages
 
         private void AddSubject_Click(object sender, RoutedEventArgs e)
         {
-            AddSubject addSubject = new AddSubject();
+            AddSubject addSubject = new AddSubject(currentuser);
             addSubject.ShowDialog();
         }
 
         private void Continue_Click(object sender, RoutedEventArgs e)
         {
-            SubjectMain subjectMain = new SubjectMain(CurrentUser);
+            SubjectMain subjectMain = new SubjectMain(currentuser);
             NavigatorObject.Switch(subjectMain);
         }
 
@@ -109,6 +99,31 @@ namespace Academy.Presentation.View.Pages
                     SubjectManager.GetInstance().SelectedSubject = selectedSubject;
                 }
             }
+        }
+
+        private void Users_Click(object sender, RoutedEventArgs e)
+        {
+            NavigatorObject.Switch(new UsersPage(currentuser));
+        }
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserPopup.IsOpen)
+            {
+                UserPopup.IsOpen = false;
+            }
+            else if (UserPopup.IsOpen == false)
+            {
+                UserPopup.IsOpen = true;
+            }
+        }
+
+        private void Quit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
+            UserPopup.IsOpen = false;
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.ShowDialog();
         }
     }
 }

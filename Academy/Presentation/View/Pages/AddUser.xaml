@@ -1,0 +1,34 @@
+﻿<Window x:Class="Academy.Presentation.View.Pages.AddUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Academy.Presentation.View.Pages"
+        mc:Ignorable="d"
+        Height="330" Width="500" WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Presentation/ViewModel/MyStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid>
+        <StackPanel>
+            <Label Height="16" Width="400" Margin="0,10,0,0" Content="User Name" FontSize="9" FontFamily="Times new Roman"/>
+            <TextBox x:Name="UserName_TextBox" Style="{StaticResource RoundedTextBoxStyle}" Height="30" Width="400" Margin="0,3,0,0" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+            <Label Height="18" Width="400" Margin="0,10,0,0" Content="Login" FontSize="9" FontFamily="Times new Roman"/>
+            <TextBox x:Name="Login_TextBox" Style="{StaticResource RoundedTextBoxStyle}" Height="30" Width="400" Margin="0,3,0,0" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+            <Label Height="16" Width="400" Margin="0,10,0,0" Content="Password" FontSize="9" FontFamily="Times new Roman"/>
+            <TextBox x:Name="Password_TextBox" Style="{StaticResource RoundedTextBoxStyle}" Height="30" Width="400" Margin="0,3,0,0" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+            <Label Height="16" Width="400" Margin="0,10,0,0" Content="Status" FontSize="9" FontFamily="Times new Roman"/>
+            <ComboBox x:Name="Status_ComboBox" Height="30" Width="200" HorizontalAlignment="Left" Margin="45,0,0,0">
+                <ComboBoxItem Content="Student"/>
+                <ComboBoxItem Content="Admin"/>
+            </ComboBox>
+            <Button Click="CreateUser_Click" Height="30" Width="250" Margin="0,20,0,0" Content="Create User" FontSize="18"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,4 +1,6 @@
-﻿using Academy.Domain.Entities.Subject;
+﻿using Academy.Domain.Entities;
+using Academy.Domain.Entities.Subject;
+using Academy.Domain.Entities.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +20,11 @@ namespace Academy.Presentation.View.Pages
     public partial class AddSubject : Window
     {
         Subject newSubject;
-        public AddSubject()
+        MyUser currentUser;
+        public AddSubject(MyUser CurrentUser)
         {
             InitializeComponent();
+            currentUser = CurrentUser;
         }
 
         private void CreateSubject_Click(object sender, RoutedEventArgs e)
@@ -31,6 +35,7 @@ namespace Academy.Presentation.View.Pages
             newSubject = new Subject(Name, Desc, Image);
             SubjectManager.GetInstance().Subjects.Add(newSubject);
             this.Close();
+            NavigatorObject.Switch(new HomeScreen());
         }
     }
 }

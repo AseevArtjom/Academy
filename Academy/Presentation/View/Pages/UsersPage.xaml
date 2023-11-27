@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="Academy.Presentation.View.Pages.UsersPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Academy.Presentation.View.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="520" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Background="IndianRed">
+            <WrapPanel Height="50" Margin="0,10,0,0">
+                <Button Height="40" Width="100" Margin="20,5,0,5" Background="#686bff" BorderBrush="#434556" BorderThickness="1" Content="Subjects" Foreground="Black" FontSize="15" Click="Subject_Click"/>
+                <Button Height="40" Width="100" Margin="10,5,0,5" Background="#686bff" BorderBrush="#434556" BorderThickness="1" Content="Schedules" Foreground="Black" FontSize="15" Click="Schedules_Click"/>
+                <Button Height="40" Width="100" Margin="10,5,0,5" Background="#686bff" BorderBrush="#434556" BorderThickness="1" Content="Users" Foreground="Black" FontSize="15"/>
+
+                <Label x:Name="UserNameTextBox" Height="50" Width="250" Margin="120,0,0,0" FontSize="30" FontFamily="Times New Roman" FontWeight="SemiBold"  Foreground="#434556"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                <Button x:Name="ProfileButton" Click="Profile_Click" Height="50" Width="50" Margin="10,0,0,0" Background="Transparent" Panel.ZIndex="2" BorderThickness="0"/>
+                <Image Margin="-50,0,0,0" Height="45" Width="45" Source="https://cdn.icon-icons.com/icons2/1154/PNG/512/1486564400-account_81513.png"/>
+                <Popup x:Name="UserPopup" Height="200" Width="300" PlacementTarget="{Binding ElementName=ProfileButton}" HorizontalOffset="-250">
+                    <Grid Background="Transparent">
+                        <Border CornerRadius="10" Background="White" BorderBrush="White"/>
+                        <WrapPanel>
+                            <Image Source="https://cdn.icon-icons.com/icons2/1154/PNG/512/1486564400-account_81513.png" Height="70" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                            <Label   Height="40" Width="200" Content="{Binding ElementName=UserNameTextBox, Path=Content}" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontFamily="Arial" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0"/>
+                        </WrapPanel>
+                        <Button Click="Quit_Click" Height="40" Width="100" Content="Quit" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Background="#ff634d" BorderThickness="0"/>
+                    </Grid>
+                </Popup>
+            </WrapPanel>
+
+            <WrapPanel>
+                <Label Height="45" Margin="20,5,0,0" Content="UserList" FontSize="30" FontFamily="Times New Roman" FontWeight="SemiBold"  Foreground="#434556"/>
+                <Image Width="100" Margin="-20,0,0,0" Source="https://cdn.icon-icons.com/icons2/93/PNG/256/configure_user_16726.png" Height="40"/>
+
+                <Button Margin="280,0,0,0" Width="130" Content="Add User" Background="#686bff" BorderThickness="0" HorizontalContentAlignment="Left" Click="AddUser_Click"/>
+                <Button Margin="10,0,0,0" Width="140" Content="Delete User" Background="#686bff" BorderThickness="0" HorizontalContentAlignment="Left" Click="DeleteUser_Click"/>
+                <Image Source="https://cdn.icon-icons.com/icons2/916/PNG/512/Plus_icon-icons.com_71848.png" Height="30" Width="30" Margin="-350,0,0,0"/>
+                <Image Source="https://cdn.icon-icons.com/icons2/1674/PNG/512/minus_111123.png" Height="30" Width="30" Margin="-45,0,0,0"/>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Background="RosyBrown">
+            
+            <WrapPanel Height="45" VerticalAlignment="Top">
+                <Label Width="50" Content="Id" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                <Label Width="193" Content="User Name" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                <Label Width="193" Content="Login" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                <Label Width="194" Content="Password" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                <Label Width="154" Content="Status" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+            </WrapPanel>
+            
+            <StackPanel Margin="0,10,0,0">
+                <ListView x:Name="LVUsers">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <WrapPanel>
+                                    <Label Margin="-8,0,0,0" Content="1" Width="50" Height="45" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                                    <Label Content="{Binding UserName}" Width="193" Height="45" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                                    <Label Content="{Binding Login}" Width="193" Height="45" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                                    <Label Content="{Binding Password}" Width="193" Height="45" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                                    <Label Content="{Binding Status}" Width="147" Height="45" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                                </WrapPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </StackPanel>
+        
+
+        
+    </Grid>
+</UserControl>

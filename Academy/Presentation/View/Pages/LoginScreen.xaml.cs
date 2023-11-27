@@ -19,12 +19,10 @@ namespace Academy.Presentation.View.Pages
 {
     public partial class LoginScreen : Window
     {
-        private UserList userList;
         private MyUser currentUser;
-        public LoginScreen(UserList userlist)
+        public LoginScreen()
         {
             InitializeComponent();
-            this.userList = userlist;
         }
 
         private void PasswordBox_GotFocus(object sender, RoutedEventArgs e)
@@ -74,13 +72,13 @@ namespace Academy.Presentation.View.Pages
 
         private void LoginClick(object sender, RoutedEventArgs e)
         {
-            foreach(MyUser item in userList.GetUsers())
+            foreach(MyUser item in UserManager.GetInstance().Users)
             {
                 if(item.GetLogin() == LoginTextBox.Text && item.GetPassword() == PasswordBox.Password)
                 {
-                    currentUser = item;
                     this.Close();
-                    MainWindow window = new MainWindow(currentUser);
+                    UserManager.GetInstance().SelectedUser = item;
+                    MainWindow window = new MainWindow(item);
                     
                     return;
                 }

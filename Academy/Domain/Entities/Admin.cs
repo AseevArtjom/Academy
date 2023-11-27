@@ -13,7 +13,10 @@ namespace Academy.Domain.Entities
         private string Login;
         private string Password;
         private string UserName;
-        private string Status;
+        private string _status;
+
+        public string? Status { get { return _status; } set { _status = value; OnPropertyChanged("Status"); } }
+
         public Admin(string login, string password, string userName) : base(login, password, userName)
         {
             Login = login;

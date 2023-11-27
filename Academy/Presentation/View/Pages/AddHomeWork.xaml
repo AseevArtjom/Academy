@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Academy.Presentation.View.Pages"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Height="540" Width="500">
+        Height="540" Width="500" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -95,7 +95,7 @@
                 materialDesign:HintAssist.Hint="Date"
                 Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
 
-            <Button Margin="0,15,0,0" Height="30" Width="200" Content="Create HomeWork"/>
+            <Button Margin="0,15,0,0" Height="30" Width="200" Content="Create HomeWork" Click="CreateHomeWork_Click"/>
         </StackPanel>
     </Grid>
 </Window>

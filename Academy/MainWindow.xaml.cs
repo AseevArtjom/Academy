@@ -3,6 +3,7 @@ using Academy.Domain.Entities.HomeWork;
 using Academy.Domain.Entities.Subject;
 using Academy.Domain.Entities.User;
 using Academy.Domain.Interfaces;
+using Academy.Domain.Entities.Comment;
 using Academy.Presentation.View.Pages;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -24,35 +25,26 @@ namespace Academy
 {
     public partial class MainWindow : Window
     {
-        private UserList userList = new UserList();
-        private MyUser CurrentUser;
+        private MyUser CurrentUser = UserManager.GetInstance().SelectedUser;
 
         public MainWindow()
         {
             InitializeComponent();
             NavigatorObject.pageSwitcher = this;
 
-            Admin admin = new Admin("admin","admin","Admin");
-            userList.AddUser(admin);
+            var usermanager = UserManager.GetInstance();
+            usermanager.Users.Add(new Admin("admin", "admin", "Admin"));
+            usermanager.Users.Add(new MyUser("User","User","Default User"));
+
+            UserManager.GetInstance().Users[1].Subjects.Add(new Subject("TEST", "TEST", ""));
+            UserManager.GetInstance().Users[0].Subjects.Add(new Subject("Math", "Basic algorithms", "https://cdn.icon-icons.com/icons2/1351/PNG/512/icon-math_87982.png"));
+            UserManager.GetInstance().Users[0].Subjects.Add(new Subject("Chemistry", "Basic chemical elements", "https://cdn.icon-icons.com/icons2/1617/PNG/512/3700459-chemical-chemistry-education-flask-science-test-tube_108750.png"));
+            UserManager.GetInstance().Users[0].Subjects.Add(new Subject("С++", "С++ for dummies", "https://cdn.icon-icons.com/icons2/2148/PNG/512/c_icon_132529.png"));
+            UserManager.GetInstance().Users[0].Subjects.Add(new Subject("Physics", "explore laws of nature", "https://cdn.icon-icons.com/icons2/609/PNG/512/molecule_icon-icons.com_56341.png"));
+            UserManager.GetInstance().Users[0].Subjects.Add(new Subject("Geometry", "Shapes", "https://cdn.icon-icons.com/icons2/1617/PNG/512/3700470-drawing-geometry-measure-measuring-rulers-set-square_108760.png"));
 
 
-            var subjectManager = SubjectManager.GetInstance();
-            subjectManager.Subjects.Add(new Subject("Math", "Basic algorithms", "https://cdn.icon-icons.com/icons2/1351/PNG/512/icon-math_87982.png"));
-            subjectManager.Subjects.Add(new Subject("Geometry", "Basic shapes", "https://cdn.icon-icons.com/icons2/1617/PNG/512/3700470-drawing-geometry-measure-measuring-rulers-set-square_108760.png"));
-            subjectManager.Subjects.Add(new Subject("English", "Learn language", "https://cdn.icon-icons.com/icons2/3665/PNG/512/gb_flag_great_britain_england_union_jack_english_icon_228674.png"));
-            subjectManager.Subjects.Add(new Subject("Geography", "Geography of the world", "https://cdn.icon-icons.com/icons2/2313/PNG/512/globe_geography_global_international_education_icon_141976.png"));
-            subjectManager.Subjects.Add(new Subject("Computer science", "Basic programming languages", "https://cdn.icon-icons.com/icons2/568/PNG/512/desk_icon-icons.com_54432.png"));
-            subjectManager.Subjects.Add(new Subject("Chemistry", "Molecular Science", "https://cdn.icon-icons.com/icons2/1617/PNG/512/3700459-chemical-chemistry-education-flask-science-test-tube_108750.png"));
-            subjectManager.Subjects.Add(new Subject("Physics", "Explore laws of nature", "https://cdn.icon-icons.com/icons2/609/PNG/512/molecule_icon-icons.com_56341.png"));
-
-
-            subjectManager.Subjects[0].homeworks.Add(new HomeWork("Essay", new DateTime(2023, 11, 18), new DateTime(2023, 11, 25), CurrentUser, 0));
-            subjectManager.Subjects[0].homeworks.Add(new HomeWork("Presentation", new DateTime(2023, 11, 20), new DateTime(2023, 11, 28), CurrentUser, 0));
-            subjectManager.Subjects[0].homeworks.Add(new HomeWork("Math Problems", new DateTime(2023, 11, 22), new DateTime(2023, 11, 30), CurrentUser, 0));
-            subjectManager.Subjects[1].homeworks.Add(new HomeWork("Presentation", new DateTime(2023, 11, 20), new DateTime(2023, 11, 28), CurrentUser, 0));
-            subjectManager.Subjects[2].homeworks.Add(new HomeWork("Math Problems", new DateTime(2023, 11, 22), new DateTime(2023, 11, 30), CurrentUser, 0));
-
-            LoginScreen loginScreen = new LoginScreen(userList);
+            LoginScreen loginScreen = new LoginScreen();
             loginScreen.ShowDialog();
 
             
@@ -62,7 +54,10 @@ namespace Academy
         {
 
             this.CurrentUser = currentuser;
-            HomeScreen homeScreen = new HomeScreen(CurrentUser);
+            HomeScreen homeScreen = new HomeScreen();
+
+            
+
             NavigatorObject.Switch(homeScreen);
         }
 
