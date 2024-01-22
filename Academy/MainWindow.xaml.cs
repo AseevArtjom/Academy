@@ -20,6 +20,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Academy.Presentation.View.Pages.CRUD_Student;
 
 namespace Academy
 {
@@ -32,33 +33,31 @@ namespace Academy
             InitializeComponent();
             NavigatorObject.pageSwitcher = this;
 
-            var usermanager = UserManager.GetInstance();
-            usermanager.Users.Add(new Admin("admin", "admin", "Admin"));
-            usermanager.Users.Add(new MyUser("User","User","Default User"));
-
-            UserManager.GetInstance().Users[1].Subjects.Add(new Subject("TEST", "TEST", ""));
-            UserManager.GetInstance().Users[0].Subjects.Add(new Subject("Math", "Basic algorithms", "https://cdn.icon-icons.com/icons2/1351/PNG/512/icon-math_87982.png"));
-            UserManager.GetInstance().Users[0].Subjects.Add(new Subject("Chemistry", "Basic chemical elements", "https://cdn.icon-icons.com/icons2/1617/PNG/512/3700459-chemical-chemistry-education-flask-science-test-tube_108750.png"));
-            UserManager.GetInstance().Users[0].Subjects.Add(new Subject("С++", "С++ for dummies", "https://cdn.icon-icons.com/icons2/2148/PNG/512/c_icon_132529.png"));
-            UserManager.GetInstance().Users[0].Subjects.Add(new Subject("Physics", "explore laws of nature", "https://cdn.icon-icons.com/icons2/609/PNG/512/molecule_icon-icons.com_56341.png"));
-            UserManager.GetInstance().Users[0].Subjects.Add(new Subject("Geometry", "Shapes", "https://cdn.icon-icons.com/icons2/1617/PNG/512/3700470-drawing-geometry-measure-measuring-rulers-set-square_108760.png"));
-
-
             LoginScreen loginScreen = new LoginScreen();
             loginScreen.ShowDialog();
-
-            
         }
 
         public MainWindow(MyUser currentuser)
         {
 
             this.CurrentUser = currentuser;
-            HomeScreen homeScreen = new HomeScreen();
+            var window = new UserControl();
 
-            
+            if (this.CurrentUser.Status == "Admin")
+            {
+                window = new HomeScreen();
+            }
+            else if (this.CurrentUser.Status == "Student")
+            {
+                window = new Student_HomeScreen();
+            }
+            else
+            {
+                MessageBox.Show("Login error!","Login Exception",MessageBoxButton.OK,MessageBoxImage.Error);
+                return;
+            }
 
-            NavigatorObject.Switch(homeScreen);
+            NavigatorObject.Switch(window);
         }
 
         public Action? CloseAction { get; set; }

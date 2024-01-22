@@ -2,6 +2,7 @@
 using Academy.Domain.Entities.Subject;
 using Academy.Domain.Entities.User;
 using Academy.Domain.Interfaces;
+using Academy.Models.Repositories;
 using Academy.Presentation.View.Pages;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,12 +24,13 @@ using System.Windows.Shapes;
 
 namespace Academy.Presentation.View.Pages
 {
-    /// <summary>
-    /// Interaction logic for HomeScreen.xaml
-    /// </summary>
     public partial class HomeScreen : UserControl
     {
         MyUser currentuser = UserManager.GetInstance().SelectedUser;
+        SubjectRepository subjects = new SubjectRepository();
+        UserRepository users = new UserRepository();
+        GroupRepository groups = new GroupRepository();
+
         public HomeScreen()
         {
             InitializeComponent();
@@ -35,7 +38,18 @@ namespace Academy.Presentation.View.Pages
 
             UserNameTextBox.Content = currentuser.GetUserName().ToString();
 
-            LVHomeScreen.ItemsSource = UserManager.GetInstance().SelectedUser.Subjects;
+            var groupList = groups.GetGroups();
+
+            for (int i = 0; i < groupList.Count; i++)
+            {
+                Groups_ComboBox.Items.Add(groupList[i].Name);
+                if (groupList[i].Id == currentuser.GroupId)
+                {
+                    Groups_ComboBox.SelectedItem = groupList[i].Name;
+                }
+            }
+
+            LVHomeScreen.ItemsSource = subjects.GetSubjectsByGroupId(currentuser.GroupId);
         }
 
         private void LVMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -125,5 +139,20 @@ namespace Academy.Presentation.View.Pages
             LoginScreen loginScreen = new LoginScreen();
             loginScreen.ShowDialog();
         }
+
+        private void GroupsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Groups_ComboBox.SelectedItem != null)
+            {
+                int newGroupId = groups.GetIdByName(Groups_ComboBox.SelectedValue.ToString());
+                groups.UpdateGroupById(currentuser.Id, newGroupId);
+
+                currentuser.GroupId = newGroupId;
+
+                UserNameTextBox.Content = currentuser.GetUserName().ToString();
+                LVHomeScreen.ItemsSource = subjects.GetSubjectsByGroupId(currentuser.GroupId);
+            }
+        }
+
     }
 }

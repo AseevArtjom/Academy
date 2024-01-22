@@ -47,11 +47,11 @@
         <StackPanel Grid.Row="1" Background="RosyBrown">
             
             <WrapPanel Height="45" VerticalAlignment="Top">
-                <Label Width="50" Content="Id" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
-                <Label Width="193" Content="User Name" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
-                <Label Width="193" Content="Login" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
-                <Label Width="194" Content="Password" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
-                <Label Width="154" Content="Status" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                <Label Width="80" Content="Id" FontSize="20" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                <Label Width="200" Content="User Name" FontSize="20" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                <Label Width="200" Content="Login" FontSize="20" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                <Label Width="200" Content="Password" FontSize="20" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                <Label Width="100" Content="Status" FontSize="20" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
             </WrapPanel>
             
             <StackPanel Margin="0,10,0,0">
@@ -60,11 +60,11 @@
                         <DataTemplate>
                             <StackPanel>
                                 <WrapPanel>
-                                    <Label Margin="-8,0,0,0" Content="1" Width="50" Height="45" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
-                                    <Label Content="{Binding UserName}" Width="193" Height="45" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
-                                    <Label Content="{Binding Login}" Width="193" Height="45" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
-                                    <Label Content="{Binding Password}" Width="193" Height="45" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
-                                    <Label Content="{Binding Status}" Width="147" Height="45" FontSize="25" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                                    <Label Content="{Binding Id}" Margin="-8,0,0,0" Width="80" Height="40" FontSize="20" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                                    <Label Content="{Binding UserName}" Width="200" Height="40" FontSize="20" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                                    <Label Content="{Binding Login}" Width="200" Height="40" FontSize="20" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                                    <Label Content="{Binding Password}" Width="196" Height="40" FontSize="20" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
+                                    <Label Content="{Binding Status}" Width="100" Height="40" FontSize="20" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="2"/>
                                 </WrapPanel>
                             </StackPanel>
                         </DataTemplate>

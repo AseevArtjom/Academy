@@ -1,5 +1,6 @@
 ﻿using Academy.Domain.Entities;
 using Academy.Domain.Entities.User;
+using Academy.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,14 @@ namespace Academy.Presentation.View.Pages
     public partial class UsersPage : UserControl
     {
         MyUser CurrentUser;
+        UserRepository users = new UserRepository();
         public UsersPage(MyUser CurrentUser)
         {
             InitializeComponent();
             this.CurrentUser = CurrentUser;
             UserNameTextBox.Content = CurrentUser.UserName;
-            LVUsers.ItemsSource = UserManager.GetInstance().Users;
+
+            LVUsers.ItemsSource = users.GetUsers();
         }
 
         private void Updatepage()
@@ -53,15 +56,16 @@ namespace Academy.Presentation.View.Pages
         private void DeleteUser_Click(object sender, RoutedEventArgs e)
         {
             var SelectedUser = LVUsers.SelectedItem as MyUser;
+            int SelectedUserId = users.GetIdByLogin(SelectedUser.Login);
             var choice = MessageBox.Show("Are you sure you want to delete " + SelectedUser.UserName + "?","Choice",MessageBoxButton.YesNo,MessageBoxImage.Question,MessageBoxResult.No);
             if (choice == MessageBoxResult.Yes)
             {
-                UserManager.GetInstance().Users.Remove(SelectedUser);
+                users.Delete(SelectedUserId);
                 Updatepage();
             }
             else
             {
-
+                return;
             }   
         }
 

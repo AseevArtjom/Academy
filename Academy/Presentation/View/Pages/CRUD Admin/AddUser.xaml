@@ -23,11 +23,20 @@
             <TextBox x:Name="Login_TextBox" Style="{StaticResource RoundedTextBoxStyle}" Height="30" Width="400" Margin="0,3,0,0" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
             <Label Height="16" Width="400" Margin="0,10,0,0" Content="Password" FontSize="9" FontFamily="Times new Roman"/>
             <TextBox x:Name="Password_TextBox" Style="{StaticResource RoundedTextBoxStyle}" Height="30" Width="400" Margin="0,3,0,0" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-            <Label Height="16" Width="400" Margin="0,10,0,0" Content="Status" FontSize="9" FontFamily="Times new Roman"/>
-            <ComboBox x:Name="Status_ComboBox" Height="30" Width="200" HorizontalAlignment="Left" Margin="45,0,0,0">
-                <ComboBoxItem Content="Student"/>
-                <ComboBoxItem Content="Admin"/>
-            </ComboBox>
+            <WrapPanel Width="400">
+                <Label Height="16" Width="100" Margin="-5,10,0,0" Content="Status" FontSize="9" FontFamily="Times new Roman"/>
+                <Label Height="16" Width="100" Margin="125,10,0,0" Content="Group" FontSize="8" FontFamily="Times new Roman"/>
+            </WrapPanel>
+            <WrapPanel>
+                <ComboBox x:Name="Status_ComboBox" Height="30" Width="150" HorizontalAlignment="Left" Margin="45,0,0,0">
+                    <ComboBoxItem Content="Student"/>
+                    <ComboBoxItem Content="Admin"/>
+                </ComboBox>
+
+                <ComboBox x:Name="Group_ComboBox" Height="30" Width="180" Margin="75,0,0,0">
+                    
+                </ComboBox>
+            </WrapPanel>
             <Button Click="CreateUser_Click" Height="30" Width="250" Margin="0,20,0,0" Content="Create User" FontSize="18"/>
         </StackPanel>
     </Grid>

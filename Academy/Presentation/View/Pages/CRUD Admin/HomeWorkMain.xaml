@@ -17,6 +17,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <Border Grid.RowSpan="2" Height="500" Width="2" Grid.Column="1" Background="Black" HorizontalAlignment="Left" />
+
         <WrapPanel Background="IndianRed">
             <Button Height="40" Width="100" Background="IndianRed" BorderThickness="0" Foreground="Black" Content="Back" FontSize="20" HorizontalContentAlignment="Right" Margin="20,10,0,0" Click="Back_Click"/>
             <Image  Height="20" Width="30" Source="https://cdn.icon-icons.com/icons2/1415/PNG/512/ic-back_97586.png" Margin="-160,10,0,0"/>
@@ -41,25 +43,54 @@
                     <Binding Path="Text" ElementName="Desc_TextBox"/>
                 </TextBlock.Text>
             </TextBlock>
-            <Button Click="Save_Click" Height="30" Width="150" Content="Save" FontSize="18" Margin="310,20,0,0" Background="#007aff" BorderBrush="Gray" BorderThickness="0.6"/>
+            <Button Click="Save_Click" Height="30" Width="150" Content="Save" FontSize="18" Margin="310,20,0,0" Background="#007aff" BorderBrush="Gray" BorderThickness="0.6" VerticalAlignment="Center"/>
+            
+            <WrapPanel Grid.Row="1" Width="542" Height="40" Background="IndianRed" Margin="-1,180,0,0">
+                <Label FontFamily="Times new Roman" Content="Mark :" Foreground="Black" FontSize="25" Margin="10,0,0,0"/>
+                <ComboBox x:Name="Mark_Combobox" Margin="5,0,0,0" Height="30" Width="80" FontSize="20" Background="#466cff"
+                        FontFamily="Arial" FontWeight="Bold" KeyDown="Mark_Combobox_KeyDown"
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Top">
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                    <ComboBoxItem HorizontalContentAlignment="Center"/>
+                    <ComboBoxItem>1</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>3</ComboBoxItem>
+                    <ComboBoxItem>4</ComboBoxItem>
+                    <ComboBoxItem>5</ComboBoxItem>
+                    <ComboBoxItem>6</ComboBoxItem>
+                    <ComboBoxItem>7</ComboBoxItem>
+                    <ComboBoxItem>8</ComboBoxItem>
+                    <ComboBoxItem>9</ComboBoxItem>
+                    <ComboBoxItem>10</ComboBoxItem>
+                    <ComboBoxItem>11</ComboBoxItem>
+                    <ComboBoxItem>12</ComboBoxItem>
+                </ComboBox>
+
+            </WrapPanel>
+            
         </StackPanel>
+        
         <WrapPanel Grid.Column="1" Grid.Row="0" Background="IndianRed">
             
         </WrapPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="2">
             <Label Margin="0,10,0,0" Height="30" Content="Private comments" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18"  FontFamily="Arial"/>
-            <ListView x:Name="LVComments" Height="340" Width="200">
+            <ListView x:Name="LVComments" Height="340" Width="230">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <StackPanel>
                                 <WrapPanel>
                                     <Image Height="25" Width="22" Source="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"/>
-                                    <Label Content="{Binding WhoSent}" FontSize="9"/>
+                                    <Label Content="{Binding SenderName}" FontSize="9" Foreground="Black"/>
                                 </WrapPanel>
                                 <WrapPanel>
-                                    <TextBlock Width="165" Text="{Binding CommentText}" TextWrapping="Wrap"/>
+                                    <TextBlock Width="165" Text="{Binding Text}" TextWrapping="Wrap"/>
                                 </WrapPanel>
                             </StackPanel>
                         </Grid>
@@ -67,10 +98,15 @@
                 </ListView.ItemTemplate>
             </ListView>
             <WrapPanel>
-                <TextBox x:Name="Sending_TextBox" Width="190" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="15" VerticalAlignment="Bottom"/>
+                <Button Click="CommentDelete_Click" Background="#466cff" BorderThickness="0"  Margin="5,5,0,0"/>
+                <Image Source="https://cdn.icon-icons.com/icons2/692/PNG/512/seo-social-web-network-internet_262_icon-icons.com_61518.png" Margin="-30,5,0,0" Height="30" Width="30" IsHitTestVisible="False"/>
+                <TextBox x:Name="Sending_TextBox" Width="150" Margin="10,0,0,3" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="15" VerticalAlignment="Bottom"/>
                 <Button Click="Send_Click" Background="IndianRed" BorderThickness="0" Margin="10,5,0,0"/>
                 <Image Source="https://cdn.icon-icons.com/icons2/259/PNG/128/ic_send_128_28719.png" Margin="-30,5,0,0" Height="20" Width="20" IsHitTestVisible="False"/>
             </WrapPanel>
         </StackPanel>
+
+        
+        
     </Grid>
 </UserControl>

@@ -1,6 +1,7 @@
 ﻿using Academy.Domain.Entities;
 using Academy.Domain.Entities.Subject;
 using Academy.Domain.Entities.User;
+using Academy.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,10 @@ namespace Academy.Presentation.View.Pages
     {
         Subject newSubject;
         MyUser currentUser;
+
+        UserRepository users = new UserRepository();
+        SubjectRepository subjects = new SubjectRepository();
+
         public AddSubject(MyUser CurrentUser)
         {
             InitializeComponent();
@@ -32,8 +37,13 @@ namespace Academy.Presentation.View.Pages
             string Image = Image_TextBox.Text;
             string Name = Name_TextBox.Text;
             string Desc = Desc_TextBox.Text;
-            newSubject = new Subject(Name, Desc, Image);
-            SubjectManager.GetInstance().Subjects.Add(newSubject);
+            int GroupId = currentUser.GroupId;
+
+            newSubject = new Subject(Name, Desc, Image,GroupId);
+
+            subjects.Create(newSubject);
+
+
             this.Close();
             NavigatorObject.Switch(new HomeScreen());
         }

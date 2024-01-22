@@ -22,11 +22,11 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Grid.Row="0">
             <Label Height="50" Width="100" Content="Sing in" FontSize="28" FontFamily="Arial" HorizontalAlignment="Left" Margin="25,15,0,0"/>
-            <TextBox x:Name="LoginTextBox" Height="50" Width="450" Style="{StaticResource RoundedTextBoxStyle}" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="admin" Foreground="Gray"
+            <TextBox x:Name="LoginTextBox" Height="50" Width="450" Style="{StaticResource RoundedTextBoxStyle}" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="Admin" Foreground="Gray"
                      GotFocus="TextBox_GotFocus" 
                      LostFocus="TextBox_LostFocus"/>
 
-            <PasswordBox x:Name="PasswordBox" Password="admin"
+            <PasswordBox x:Name="PasswordBox" Password="Admin"
                  Margin="0,30,0,0" 
                  Height="50" 
                  Style="{StaticResource RoundedPasswordBoxStyle}" 

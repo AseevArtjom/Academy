@@ -1,5 +1,8 @@
-﻿using Academy.Domain.Entities.User;
+﻿using Academy.Domain.Entities.HomeWork;
+using Academy.Domain.Entities.Subject;
+using Academy.Domain.Entities.User;
 using Academy.Domain.Entities;
+using Academy.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,22 +17,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Net.Security;
-using Academy.Domain.Entities.Subject;
-using System.Security.Cryptography.Pkcs;
-using Academy.Domain.Entities.HomeWork;
 
-namespace Academy.Presentation.View.Pages
+namespace Academy.Presentation.View.Pages.CRUD_Student
 {
-    /// <summary>
-    /// Interaction logic for SubjectMain.xaml
-    /// </summary>
-    public partial class SubjectMain : UserControl
+    public partial class Student_SubjectMain : UserControl
     {
         MyUser currentuser;
         Subject SelectedSubject;
         HomeWork SelectedHomeWork;
-        public SubjectMain(MyUser CurrentUser)
+        HomeWorkRepository homeworks = new HomeWorkRepository();
+
+        public Student_SubjectMain(MyUser CurrentUser)
         {
             InitializeComponent();
             currentuser = CurrentUser;
@@ -43,21 +41,21 @@ namespace Academy.Presentation.View.Pages
                 var bitmapImage = new BitmapImage(new Uri(SelectedSubject.Image));
                 LogoImage.Source = bitmapImage;
             }
-            
 
-            
 
-            LVHomeWork.ItemsSource = SelectedSubject.homeworks.HomeWorks;
+
+
+            LVHomeWork.ItemsSource = homeworks.GetHomeWorksBySubjectId(SelectedSubject.Id);
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            NavigatorObject.Switch(new HomeScreen());
+            NavigatorObject.Switch(new Student_HomeScreen());
         }
 
         private void HomeWorkClick(object sender, RoutedEventArgs e)
         {
-            HomeWorkMain homeWorkMain = new HomeWorkMain(currentuser);
+            Student_HomeWorkMain homeWorkMain = new Student_HomeWorkMain(currentuser, SelectedHomeWork);
             NavigatorObject.Switch(homeWorkMain);
         }
 
@@ -67,22 +65,9 @@ namespace Academy.Presentation.View.Pages
             {
                 if (item.DataContext is HomeWork selectedhomework)
                 {
-                    SubjectManager.GetInstance().SelectedSubject.SelectedHomeWork = selectedhomework;
+                    SelectedHomeWork = selectedhomework;
                 }
             }
-        }
-
-        private void AddHomeWork(object sender, RoutedEventArgs e)
-        {
-            AddHomeWork addHomeWork = new AddHomeWork(currentuser);
-            addHomeWork.ShowDialog();
-        }
-
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-            SubjectManager.GetInstance().SelectedSubject.homeworks.RemoveHomeWork(SubjectManager.GetInstance().SelectedSubject.SelectedHomeWork);
-            SubjectMain subjectmain = new SubjectMain(currentuser);
-            NavigatorObject.Switch(subjectmain);
         }
     }
 }

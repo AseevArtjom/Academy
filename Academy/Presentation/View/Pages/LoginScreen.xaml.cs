@@ -1,8 +1,12 @@
 ﻿using Academy.Domain.Entities;
 using Academy.Domain.Entities.User;
+using Academy.Models.Repositories;
+using Dapper;
 using MaterialDesignThemes.Wpf;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +28,8 @@ namespace Academy.Presentation.View.Pages
         {
             InitializeComponent();
         }
+
+        string ConnectionString = @"Data Source=DESKTOP-0S5CE1C;Initial Catalog=Project_Academy;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         private void PasswordBox_GotFocus(object sender, RoutedEventArgs e)
         {         
@@ -72,7 +78,8 @@ namespace Academy.Presentation.View.Pages
 
         private void LoginClick(object sender, RoutedEventArgs e)
         {
-            foreach(MyUser item in UserManager.GetInstance().Users)
+            UserRepository users = new UserRepository();
+            foreach(MyUser item in users.GetUsers())
             {
                 if(item.GetLogin() == LoginTextBox.Text && item.GetPassword() == PasswordBox.Password)
                 {

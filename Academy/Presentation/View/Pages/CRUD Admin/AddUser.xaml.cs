@@ -1,5 +1,7 @@
 ﻿using Academy.Domain.Entities;
+using Academy.Domain.Entities.Group;
 using Academy.Domain.Entities.User;
+using Academy.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +18,22 @@ using System.Windows.Shapes;
 
 namespace Academy.Presentation.View.Pages
 {
-    /// <summary>
-    /// Interaction logic for AddUser.xaml
-    /// </summary>
     public partial class AddUser : Window
     {
         public AddUser()
         {
             InitializeComponent();
-        }
 
+            GroupRepository groups = new GroupRepository();
+            List<Group> groupList = groups.GetGroups();
+
+            Group_ComboBox.Items.Clear();
+            for (int i = 0; i < groupList.Count; i++)
+            {
+                Group_ComboBox.Items.Add(groupList[i].Name);
+            }
+        }
+       
         private void CreateUser_Click(object sender, RoutedEventArgs e)
         {
             Login_TextBox.BorderBrush = Brushes.Gray;
@@ -48,17 +56,18 @@ namespace Academy.Presentation.View.Pages
             }
             else
             {
+                UserRepository users = new UserRepository();
+                GroupRepository groups = new GroupRepository();
                 string Login = Login_TextBox.Text;
                 string Password = Password_TextBox.Text;
                 string UserName = UserName_TextBox.Text;
-                if (Status_ComboBox.SelectedIndex == 0) 
-                {
-                    UserManager.GetInstance().Users.Add(new MyUser(Login, Password, UserName));
-                }
-                else if (Status_ComboBox.SelectedIndex == 1)
-                {
-                    UserManager.GetInstance().Users.Add(new Admin(Login, Password, UserName));
-                }
+                string Status = Status_ComboBox.Text;
+                int GroupId = groups.GetIdByName(Group_ComboBox.SelectedItem.ToString());
+
+                MyUser NewUser = new MyUser(Login, Password, UserName, Status, GroupId);
+
+                users.Create(NewUser);
+                
                 this.Close();
             }
         }

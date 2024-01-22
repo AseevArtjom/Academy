@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Academy.Presentation.View.Pages.CRUD_Student.Student_HomeWorkMain"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Academy.Presentation.View.Pages.CRUD_Student"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="520" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="540"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.RowSpan="2" Height="500" Width="2" Grid.Column="1" Background="Black" HorizontalAlignment="Left" />
+
+        <WrapPanel Background="IndianRed">
+            <Button Height="40" Width="100" Background="IndianRed" BorderThickness="0" Foreground="Black" Content="Back" FontSize="20" HorizontalContentAlignment="Right" Margin="20,10,0,0" Click="Back_Click"/>
+            <Image  Height="20" Width="30" Source="https://cdn.icon-icons.com/icons2/1415/PNG/512/ic-back_97586.png" Margin="-160,10,0,0"/>
+        </WrapPanel>
+
+        <StackPanel Grid.Row="1">
+            <WrapPanel Height="60">
+                <Image Source="https://i.imgur.com/E6Q2Lzv.png" Height="60" Width="60" Margin="10,5,0,0"/>
+                <Label x:Name="HomeWorkName" Height="50" Width="450" Margin="0,5,0,0" Foreground="#466cff" FontFamily="Arial" Content="123" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            </WrapPanel>
+            <WrapPanel Height="30" Width="400" HorizontalAlignment="Left" Margin="77,-15,0,0">
+                <Label x:Name="Assigner" Foreground="Gray" FontSize="12" FontFamily="Arial"  Margin="-5,5,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                <Image Source="https://cdn.icon-icons.com/icons2/1524/PNG/512/primitivedot_106373.png" Height="10" Width="10" Margin="0,5,0,0"/>
+                <Label x:Name="DateOfAssign" Foreground="Gray" FontFamily="Arial" Margin="0,4,0,0" VerticalContentAlignment="Center" FontSize="12" />
+            </WrapPanel>
+            <TextBox x:Name="Desc_TextBox" Height="80" Width="420" FontFamily="Arial" FontSize="20" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="80,0,0,0" Panel.ZIndex="1" IsReadOnly="False"/>
+            <TextBlock x:Name="SavedText" Background="Transparent" Foreground="Transparent" Margin="81,-76,0,0" Width="420" FontFamily="Arial" FontSize="20" TextWrapping="Wrap" HorizontalAlignment="Left">
+                <TextBlock.Text>
+                    <Binding Path="Text" ElementName="Desc_TextBox"/>
+                </TextBlock.Text>
+            </TextBlock>
+
+
+            <WrapPanel Grid.Row="1" Width="542" Height="40" Background="IndianRed" Margin="-1,230,0,0">
+                <Label FontFamily="Times new Roman" Content="Mark :" Foreground="Black" FontSize="25" Margin="10,0,0,0"/>
+                <Label x:Name="Mark_Label" Height="30" Width="80" Background="#007aff" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            </WrapPanel>
+
+        </StackPanel>
+
+        <WrapPanel Grid.Column="1" Grid.Row="0" Background="IndianRed">
+
+        </WrapPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="2">
+            <Label Margin="0,10,0,0" Height="30" Content="Private comments" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18"  FontFamily="Arial"/>
+            <ListView x:Name="LVComments" Height="340" Width="230">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel>
+                                <WrapPanel>
+                                    <Image Height="25" Width="22" Source="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"/>
+                                    <Label Content="{Binding SenderName}" FontSize="9" Foreground="Black"/>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock Width="165" Text="{Binding Text}" TextWrapping="Wrap"/>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <WrapPanel>
+                <Button Click="CommentDelete_Click" Background="#466cff" BorderThickness="0"  Margin="5,5,0,0"/>
+                <Image Source="https://cdn.icon-icons.com/icons2/692/PNG/512/seo-social-web-network-internet_262_icon-icons.com_61518.png" Margin="-30,5,0,0" Height="30" Width="30" IsHitTestVisible="False"/>
+                <TextBox x:Name="Sending_TextBox" Width="150" Margin="10,0,0,3" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="15" VerticalAlignment="Bottom"/>
+                <Button Click="Send_Click" Background="IndianRed" BorderThickness="0" Margin="10,5,0,0"/>
+                <Image Source="https://cdn.icon-icons.com/icons2/259/PNG/128/ic_send_128_28719.png" Margin="-30,5,0,0" Height="20" Width="20" IsHitTestVisible="False"/>
+            </WrapPanel>
+        </StackPanel>
+
+
+
+    </Grid>
+</UserControl>

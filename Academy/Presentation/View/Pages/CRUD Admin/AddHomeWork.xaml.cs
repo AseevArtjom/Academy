@@ -7,16 +7,16 @@ using System.Windows;
 
 namespace Academy.Presentation.View.Pages
 {
-    /// <summary>
-    /// Interaction logic for AddHomeWork.xaml
-    /// </summary>
     public partial class AddHomeWork : Window
     {
         MyUser currentuser;
-        public AddHomeWork(MyUser CurrentUser)
+        HomeWorkRepository homeWorkRepository = new HomeWorkRepository();
+        Subject SelectedSubject;
+        public AddHomeWork(MyUser CurrentUser, Subject currentSubject)
         {
             InitializeComponent();
             currentuser = CurrentUser;
+            SelectedSubject = currentSubject;
         }
 
         private void CreateHomeWork_Click(object sender, RoutedEventArgs e)
@@ -32,11 +32,11 @@ namespace Academy.Presentation.View.Pages
             {
                 if (string.IsNullOrWhiteSpace(Image_TextBox.Text))
                 {
-                    SubjectManager.GetInstance().SelectedSubject.homeworks.AddHomeWork(new HomeWork("https://i.imgur.com/E6Q2Lzv.png", Name_TextBox.Text, startDate, endDate, currentuser, 0));
+                    homeWorkRepository.Create(new HomeWork("https://i.imgur.com/E6Q2Lzv.png", Name_TextBox.Text, startDate, endDate, currentuser.Id,"",0),SelectedSubject.Id);
                 }
                 else
                 {
-                    SubjectManager.GetInstance().SelectedSubject.homeworks.AddHomeWork(new HomeWork(Image_TextBox.Text, Name_TextBox.Text, startDate, endDate, currentuser, 0));
+                    homeWorkRepository.Create(new HomeWork(Image_TextBox.Text, Name_TextBox.Text, startDate, endDate, currentuser.Id,"",0), SelectedSubject.Id);
                 }
                 
                 this.Close();
